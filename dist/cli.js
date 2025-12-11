@@ -37,13 +37,13 @@ function transformLineToMikrotik(line, listName = "Ads-list") {
     const hostsMatch = trimmed.match(/^0\.0\.0\.0\s+([^\s#]+)/);
     if (hostsMatch) {
         const host = hostsMatch[1];
-        return `add address=${host} disabled=no dynamic=no list=${listName}`;
+        return `add address=${host} disabled=no dynamic=no list="${listName}"`;
     }
     // Caso 2: reglas AdGuard -> ||dominio.com^
     const adguardMatch = trimmed.match(/^\|\|([^\/\^]+)\^/);
     if (adguardMatch) {
         const host = adguardMatch[1];
-        return `add address=${host} disabled=no dynamic=no list=${listName}`;
+        return `add address=${host} disabled=no dynamic=no list="${listName}"`;
     }
     // Cualquier otra cosa la ignoramos por ahora
     return null;
@@ -65,7 +65,7 @@ async function main() {
     console.log("Compilando listas con @adguard/hostlist-compiler...");
     const lines = await compile(config);
     console.log(`Recibidas ${lines.length} líneas. Convirtiendo a formato MikroTik...`);
-    const listName = config.mikrotikListName || "Ads-list";
+    const listName = config.name || "Ads-list";
     const mikrotikLines = [];
     for (const line of lines) {
         const converted = transformLineToMikrotik(line, listName);

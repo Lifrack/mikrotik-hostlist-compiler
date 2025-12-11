@@ -3,7 +3,6 @@
 Ideal para firewalls, address-lists y filtrado DNS en MikroTik.
 
 ---
-
 ## 🚀 Características
 
 - ✔ Usa el **mismo `config.json`** que HostlistCompiler  
@@ -26,6 +25,11 @@ npm run build
 
 Ejecuta despues de compilar
 node dist/cli.js -c example-config.json -o mikrotik-ads.rsc
+
+## Dudas
+
+### 1.- El nombre del address-list
+    El nombre se  define en el archivo config.json tomara el nombre que definas en name
 
 
 ## Licencia

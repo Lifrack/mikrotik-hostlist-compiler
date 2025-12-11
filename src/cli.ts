@@ -3,6 +3,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import compile from "@adguard/hostlist-compiler";
+import { config } from "node:process";
 
 /**
  * Muy simple: leer args tipo:
@@ -32,7 +33,7 @@ function parseArgs(argv: string[]) {
  *  - Formato hosts:   "0.0.0.0 dominio.com"
  *  - Formato AdGuard: "||dominio.com^"
  */
-function transformLineToMikrotik(line: string, listName = "Ads-list"): string | null {
+function transformLineToMikrotik(line: string, listName:string ="Ads-list"): string | null {
   const trimmed = line.trim();
 
   if (!trimmed || trimmed.startsWith("#") || trimmed.startsWith("!")) {
@@ -43,14 +44,14 @@ function transformLineToMikrotik(line: string, listName = "Ads-list"): string | 
   const hostsMatch = trimmed.match(/^0\.0\.0\.0\s+([^\s#]+)/);
   if (hostsMatch) {
     const host = hostsMatch[1];
-    return `add address=${host} disabled=no dynamic=no list=${listName}`;
+    return `add address=${host} disabled=no dynamic=no list="${listName}"`;
   }
 
   // Caso 2: reglas AdGuard -> ||dominio.com^
   const adguardMatch = trimmed.match(/^\|\|([^\/\^]+)\^/);
   if (adguardMatch) {
     const host = adguardMatch[1];
-    return `add address=${host} disabled=no dynamic=no list=${listName}`;
+    return `add address=${host} disabled=no dynamic=no list="${listName}"`;
   }
 
   // Cualquier otra cosa la ignoramos por ahora
@@ -80,7 +81,7 @@ async function main() {
 
   console.log(`Recibidas ${lines.length} líneas. Convirtiendo a formato MikroTik...`);
 
-  const listName = config.mikrotikListName || "Ads-list";
+  const listName = config.name || "Ads-list";
 
   const mikrotikLines: string[] = [];
   for (const line of lines) {

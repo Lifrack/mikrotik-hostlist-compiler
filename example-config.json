@@ -1,0 +1,17 @@
+{
+  "name": "MikroTik Ads List",
+  "mikrotikListName": "Ads-list",
+  "sources": [
+    {
+      "type": "hosts",
+      "source": "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+      "transformations": ["RemoveComments", "Validate"]
+    },
+    {
+      "type": "adblock",
+      "source": "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt",
+      "transformations": ["RemoveComments", "Validate"]
+    }
+  ],
+  "transformations": ["Deduplicate"]
+}

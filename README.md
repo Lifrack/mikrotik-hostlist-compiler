@@ -18,12 +18,15 @@ Ideal para firewalls, address-lists y filtrado DNS en MikroTik.
 ## 📦 Instalación
 
 Clona el repositorio e instala dependencias:
+
     npm install
 
 Compila
+
     npm run build
 
 Ejecuta despues de compilar
+
     node dist/cli.js -c example-config.json -o mikrotik-ads.rsc
 
 ## Dudas

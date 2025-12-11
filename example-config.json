@@ -1,17 +1,30 @@
 {
   "name": "MikroTik Ads List",
-  "mikrotikListName": "Ads-list",
+  "description": "List description",
+  "homepage": "https://example.org/",
+  "license": "BMCL",
+  "version": "1.0.0.0",
   "sources": [
     {
-      "type": "hosts",
-      "source": "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
-      "transformations": ["RemoveComments", "Validate"]
+      "name": "Local rules",
+      "source": "rules.txt",
+      "type": "adblock",
+      "transformations": ["RemoveComments", "Compress"],
+      "exclusions": ["excluded rule 1"],
+      "exclusions_sources": ["exclusions.txt"],
+      "inclusions": ["*"],
+      "inclusions_sources": ["inclusions.txt"]
     },
     {
-      "type": "adblock",
-      "source": "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt",
-      "transformations": ["RemoveComments", "Validate"]
+      "name": "Remote rules",
+      "source": "https://example.org/rules",
+      "type": "hosts",
+      "exclusions": ["excluded rule 1"]
     }
   ],
-  "transformations": ["Deduplicate"]
+  "transformations": ["Deduplicate", "Compress"],
+  "exclusions": ["excluded rule 1", "excluded rule 2"],
+  "exclusions_sources": ["global_exclusions.txt"],
+  "inclusions": ["*"],
+  "inclusions_sources": ["global_inclusions.txt"]
 }

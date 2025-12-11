@@ -1,6 +1,6 @@
 {
   "name": "mikrotik-hostlist-compiler",
-  "version": "0.0.1",
+  "version": "1.0.0.0",
   "description": "Wrapper en TypeScript para @adguard/hostlist-compiler que genera listas para MikroTik",
   "license": "MIT",
   "type": "module",

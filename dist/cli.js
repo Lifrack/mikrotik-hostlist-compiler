@@ -73,6 +73,7 @@ async function main() {
             mikrotikLines.push(converted);
         }
     }
+    mikrotikLines.unshift("/ip firewall address-list");
     console.log(`Quedaron ${mikrotikLines.length} entradas para MikroTik.`);
     const resolvedOutputPath = path.resolve(outputPath);
     fs.mkdirSync(path.dirname(resolvedOutputPath), { recursive: true });

@@ -1,0 +1,9 @@
+{
+  "name": "Ads-List",
+  "sources": [
+    {
+      "source": "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/AWAvenue-Ads-Rule.txt"
+    }
+  ],
+  "transformations": ["Deduplicate"]
+}
